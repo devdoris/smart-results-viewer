@@ -1,0 +1,28 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "name": "Doris",
+      "course": "Mathematics",
+      "score": 85
+    },
+    {
+      "id": 2,
+      "name": "John",
+      "course": "Physics",
+      "score": 72
+    },
+    {
+      "id": 3,
+      "name": "Amina",
+      "course": "Chemistry",
+      "score": 90
+    },
+    {
+      "id": 4,
+      "name": "David",
+      "course": "Biology",
+      "score": 65
+    }
+  ]
+}
