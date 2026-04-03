@@ -1,16 +1,46 @@
-# React + Vite
+# 🎓 Smart Results Viewer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🔗 Live Demo
+ [Live Demo](https://smart-results-viewer.netlify.app/)
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📌 Project Overview
+Smart Results Viewer is a web application that allows users to view and analyze results in a clean, interactive, and user-friendly interface. It presents data visually and makes it easier to understand performance at a glance.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
+- 📊 Interactive data visualization (charts)
+- 🔍 Clear and structured results display
+- 📱 Fully responsive design (works on all screen sizes)
+- ⚡ Fast performance using Vite
+- 🎨 Clean and modern UI
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Technologies Used
+- React
+- Vite
+- Tailwind CSS
+- Chart.js
+- Axios
+
+---
+
+## 📸 Screenshots
+
+### Dashboard
+![Dashboard](./screenshots/dashboard.png)
+
+### 📊 Score-Chart
+![Score-Chart](./screenshots/score-chart.png)
+
+---
+
+## 📊 Presentation Slides
+ [Presentation Slides](https://1drv.ms/p/c/bd65402bfdcd81e8/IQAupSn9kZrUTppcClst7ccyAc43ImE0GG1-Kn2NSa6k73Q?e=gHLErc)
+---
+
+## 🎨 Color Palette
+ [Color Palette](https://coolors.co/f3f4f6-8b5cf6-16a34a-60a5fa-2563eb-22c55e-3b82f6-6b7280)
