@@ -1,6 +1,6 @@
 [
-  { "id": 1, "name": "Doris", "course": "Math", "score": 85 },
-  { "id": 2, "name": "John", "course": "Physics", "score": 78 },
-  { "id": 3, "name": "Mary", "course": "Chemistry", "score": 92 },
-  { "id": 4, "name": "James", "course": "Biology", "score": 74 }
+  { "id": 1, "name": "Doris", "course": "Math", "semester": "Semester 1", "score": 99 },
+  { "id": 2, "name": "John", "course": "Physics", "semester": "Semester 2", "score": 50 },
+  { "id": 3, "name": "Mary", "course": "Chemistry", "semester": "Semester 1", "score": 67 },
+  { "id": 4, "name": "James", "course": "Biology", "semester": "Semester 3", "score": 45 }
 ]

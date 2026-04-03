@@ -17,7 +17,8 @@ function App() {
   const filteredStudents = students.filter(
     (s) =>
       s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      s.course.toLowerCase().includes(searchTerm.toLowerCase())
+      s.course.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      s.semester.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // CSV Export
@@ -37,55 +38,98 @@ function App() {
 
   // PDF Export
   const exportPDF = () => {
-  const doc = new jsPDF();
+    const doc = new jsPDF();
 
-  // Title
-  doc.setFontSize(18);
-  doc.text("Student Results", 14, 15);
+    // Title
+    doc.setFontSize(18);
+    doc.text("Student Results", 14, 15);
 
-  // Table columns
-  const columns = ["Name", "Course", "Score"];
-  const startY = 25; // table starts below title
-  const rowHeight = 10;
-  const colWidth = [70, 70, 30]; // adjust widths for columns
+    <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+      <div className="bg-white p-4 rounded-xl shadow text-center">
+        <p className="text-gray-500">Total Students</p>
+        <h2 className="text-2xl font-bold">{filteredStudents.length}</h2>
+      </div>
 
-  // Draw header
-  doc.setFontSize(12);
-  doc.setTextColor(255, 255, 255);
-  doc.setFillColor(59, 130, 246); // Tailwind blue
-  let x = 14;
-  let y = startY;
-  columns.forEach((col, i) => {
-    doc.rect(x, y, colWidth[i], rowHeight, "F");
-    doc.text(col, x + 2, y + 7);
-    x += colWidth[i];
-  });
+      <div className="bg-white p-4 rounded-xl shadow text-center">
+        <p className="text-gray-500">Average Score</p>
+        <h2 className="text-2xl font-bold">{averageScore.toFixed(1)}</h2>
+      </div>
 
-  // Draw rows
-  let rowY = y + rowHeight;
-  doc.setTextColor(0, 0, 0);
-  filteredStudents.forEach((s, index) => {
-    let rowX = 14;
-    const rowData = [s.name, s.course, s.score.toString()];
-    rowData.forEach((cell, i) => {
-      // Alternating row colors
-      if (index % 2 === 0) {
-        doc.setFillColor(245, 245, 245);
-        doc.rect(rowX, rowY, colWidth[i], rowHeight, "F");
-      }
-      doc.text(cell, rowX + 2, rowY + 7);
-      rowX += colWidth[i];
+      <div className="bg-white p-4 rounded-xl shadow text-center">
+        <p className="text-gray-500">Highest Score</p>
+        <h2 className="text-2xl font-bold">{highestScore}</h2>
+      </div>
+    </div>
+
+    // Table columns
+    const columns = ["Name", "Course", "Score"];
+    const startY = 25; // table starts below title
+    const rowHeight = 10;
+    const colWidth = [70, 70, 30]; // adjust widths for columns
+
+    // Draw header
+    doc.setFontSize(12);
+    doc.setTextColor(255, 255, 255);
+    doc.setFillColor(59, 130, 246); // Tailwind blue
+    let x = 14;
+    let y = startY;
+    columns.forEach((col, i) => {
+      doc.rect(x, y, colWidth[i], rowHeight, "F");
+      doc.text(col, x + 2, y + 7);
+      x += colWidth[i];
     });
-    rowY += rowHeight;
-  });
 
-  doc.save("students.pdf");
-};
+    // Draw rows
+    let rowY = y + rowHeight;
+    doc.setTextColor(0, 0, 0);
+    filteredStudents.forEach((s, index) => {
+      let rowX = 14;
+      const rowData = [s.name, s.course, s.score.toString()];
+      rowData.forEach((cell, i) => {
+        // Alternating row colors
+        if (index % 2 === 0) {
+          doc.setFillColor(245, 245, 245);
+          doc.rect(rowX, rowY, colWidth[i], rowHeight, "F");
+        }
+        doc.text(cell, rowX + 2, rowY + 7);
+        rowX += colWidth[i];
+      });
+      rowY += rowHeight;
+    });
 
+    doc.save("students.pdf");
+  };
+
+  const getGrade = (score) => {
+    if (score >= 70) return "A";
+    if (score >= 60) return "B";
+    if (score >= 50) return "C";
+    return "F";
+  };
+
+  const getGradeColor = (score) => {
+    if (score >= 70) return "text-green-600";
+    if (score >= 60) return "text-blue-400";
+    if (score >= 50) return "text-yellow-500";
+    return "text-red-500";
+  };
+
+  const getInsight = (score) => {
+    if (score >= 70) return "Excellent performance 🎉";
+    if (score >= 60) return "Better, but can improve 👌";
+    if (score >= 50) return "Good, but can improve 👍";
+    return "Needs serious improvement ⚠️";
+  };
+
+  const averageScore =
+    filteredStudents.reduce((acc, s) => acc + s.score, 0) /
+    (filteredStudents.length || 1);
+
+  const highestScore = Math.max(...filteredStudents.map((s) => s.score), 0);
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-4xl font-bold text-center mb-8 text-gray-800">
-        Smart Results Viewer
+      <h1 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
+        Smart Results Dashboard
       </h1>
 
       {/* Controls Card */}
@@ -122,18 +166,26 @@ function App() {
               <tr className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
                 <th className="p-3 text-left">Name</th>
                 <th className="p-3 text-left">Course</th>
+                <th className="p-3 text-left">Semester</th>
                 <th className="p-3 text-left">Score</th>
+                <th className="p-3 text-left">Grade</th>
+                <th className="p-3 text-left">Insight</th>
               </tr>
             </thead>
             <tbody>
               {filteredStudents.map((s) => (
-                <tr
-                  key={s.id}
-                  className="border-b last:border-none hover:bg-gray-100 transition"
-                >
+                <tr key={s.id} className="border-b hover:bg-gray-100 transition">
                   <td className="p-3">{s.name}</td>
                   <td className="p-3">{s.course}</td>
+                  <td className="p-3">{s.semester}</td>
+
                   <td className="p-3">{s.score}</td>
+
+                  <td className={`p-3 font-bold ${getGradeColor(s.score)}`}>
+                    {getGrade(s.score)}
+                  </td>
+
+                  <td className="p-3 text-sm">{getInsight(s.score)}</td>
                 </tr>
               ))}
             </tbody>
