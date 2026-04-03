@@ -9,7 +9,7 @@ function App() {
   // Fetch students from JSON server
   useEffect(() => {
     axios
-      .get("http://localhost:3000/students")
+      .get("/data.json")
       .then((res) => setStudents(res.data))
       .catch((err) => console.error(err));
   }, []);
