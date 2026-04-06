@@ -2,6 +2,7 @@
 
 ## 🔗 Live Demo
  [Live Demo](https://smart-results-viewer.netlify.app/)
+ [Live Demo](https://smart-results-viewer-seven.vercel.app/)
 
 ---
 
